@@ -1,0 +1,4 @@
+include ../tech/make/sim.make
+
+LIB=THESIS_EXP_RO_INVERTER_SKY130A
+CELL=THESIS_EXP_RO_INVERTER
