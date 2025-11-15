@@ -6,11 +6,11 @@
 [![SIM](../../actions/workflows/sim.yaml/badge.svg)](../../actions/workflows/sim.yaml)
 
 # Who
-levideq
+Levi Dequeker
 
 # Why
 
-<explain why you made this module>
+This module serves as a preliminary experiment for a masters thesis. The thesis project aims to create an on-chip ULV oscillator with a footprint and Vmin that are as small as possible. An interesting topology for this is the ring oscillator (RO).  This project tries to give insight in the ULV operation of inverters, used in the RO, made with sky130A technology.
 
 # How
 

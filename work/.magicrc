@@ -1,2 +1,4 @@
 source ../tech/magic/.magicrc
 addpath ../design/THESIS_EXP_RO_INVERTER_SKY130A
+addpath ../design/JNW_ATR_SKY130A
+addpath ../design/JNW_TR_SKY130A
