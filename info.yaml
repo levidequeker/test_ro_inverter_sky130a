@@ -11,10 +11,12 @@ email: levi.dequeker@gmail.com
 # Your github site, usually <github username>.github.io
 url: levidequeker.github.io
 doc:
+  THESIS_EXP_RO_INVERTER_SKY130A:
+      - THESIS_EXP_RO_INVERTER
   # Make docs
   #libraries:
   #   <library>:
   #       - <cell>
   #       - <cell>
 sim:
-  # <simdir>: command
+  
