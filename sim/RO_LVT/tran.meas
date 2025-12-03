@@ -1,11 +1,10 @@
-* Measure THESIS_EXP_RO_INVERTER
+* Measure RO_LVT
 .control
 
 load {cicname}.raw
 
 echo "MEAS_START"
-meas tran v_out find v(Vout)
+meas tran v_osc find v(VOUT)
 meas tran v_dd find v(VDD)
-meas tran v_gate find v(Vgate)
 echo "MEAS_END"
 .endc

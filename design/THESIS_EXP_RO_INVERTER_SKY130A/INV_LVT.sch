@@ -36,6 +36,6 @@ company="wulff"}
 C {devices/ipin.sym} -290 -530 0 0 {name=p1 lab=VDD}
 C {devices/ipin.sym} -290 -250 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} -360 -390 0 0 {name=p3 lab=Vgate}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C1F2.sym} -290 -330 0 0 {name=xls[9:0] }
-C {JNW_ATR_SKY130A/JNWATR_PCH_12C1F2.sym} -290 -450 0 0 {name=xhs[9:0]}
 C {devices/opin.sym} -160 -390 2 1 {name=p4 lab=Vout}
+C {JNW_LVT_ATR_SKY130A/JNWLVTATR_PCH_12C1F2.sym} -290 -450 0 0 {name=xhs[9:0]}
+C {JNW_LVT_ATR_SKY130A/JNWLVTATR_NCH_4C1F2.sym} -290 -330 0 0 {name=xls[9:0]}

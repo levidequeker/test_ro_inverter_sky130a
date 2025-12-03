@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/THESIS_EXP_RO_INVERTER_lpe.spi
+.include ../../../work/lpe/INV_LVT_lpe.spi
 #else
-.include ../../../work/xsch/THESIS_EXP_RO_INVERTER.spice
+.include ../../../work/xsch/INV_LVT.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -27,7 +27,6 @@ VSS  VSS  0     dc 0
 VDD  VDD  VSS  pwl 0 0 1u {AVDD}
 Vgate Vgate VSS pwl 0 0 1u {AVDD}
 
-
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -36,7 +35,8 @@ Vgate Vgate VSS pwl 0 0 1u {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(Vgate) v(Vout)
+.save  v(VDD) v(Vgate) v(Vout)
+
 
 *----------------------------------------------------------------
 * NGSPICE control

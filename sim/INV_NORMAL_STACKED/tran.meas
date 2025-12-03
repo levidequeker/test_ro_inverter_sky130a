@@ -1,4 +1,4 @@
-* Measure THESIS_EXP_RO_INVERTER
+* Measure INV_NORMAL_STACKED
 .control
 
 load {cicname}.raw

@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/THESIS_EXP_RO_INVERTER_lpe.spi
+.include ../../../work/lpe/RO_LVT_STACKED_lpe.spi
 #else
-.include ../../../work/xsch/THESIS_EXP_RO_INVERTER.spice
+.include ../../../work/xsch/RO_LVT_STACKED.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -24,9 +24,7 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 1u {AVDD}
-Vgate Vgate VSS pwl 0 0 1u {AVDD}
-
+VDD  VDD  VSS  pwl 0 0 10n 0.3
 
 *-----------------------------------------------------------------
 * DUT
@@ -36,7 +34,8 @@ Vgate Vgate VSS pwl 0 0 1u {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(Vgate) v(Vout)
+.save v(VDD) v(VOUT)
+
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -50,7 +49,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 1u 1p
+tran 10n 10m 1p
 write
 quit
 
