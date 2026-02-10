@@ -1,9 +1,8 @@
-v {xschem version=3.4.8RC file_version=1.3}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
 S {}
-F {}
 E {}
 T {ABS07W-32.768kHz-DI} -110 150 0 0 0.4 0.4 {}
 N -110 90 -110 100 {lab=VSS}
@@ -27,8 +26,8 @@ N 40 -300 110 -300 {lab=VOUT}
 N 110 -300 110 -160 {lab=VOUT}
 N -140 0 -110 0 {lab=#net1}
 N -230 0 -200 0 {lab=INJECT}
-N -170 -90 -170 -40 {lab=START}
-N -240 -40 -190 -40 {lab=xxx}
+N -170 -90 -170 -40 {lab=VSTART}
+N -240 -40 -190 -40 {lab=VSTOP}
 C {THESIS_EXP_RO_INVERTER_SKY130A/xtal.sym} -20 0 0 0 {name=x1}
 C {THESIS_EXP_RO_INVERTER_SKY130A/INV_LVT.sym} 50 -160 0 0 {name=x2}
 C {devices/capa.sym} -110 60 0 0 {name=C1
@@ -51,7 +50,7 @@ value=500Meg
 footprint=1206
 device=resistor
 m=1}
-C {devices/ipin.sym} -230 0 0 0 {name=p6 lab=INJECT}
+C {devices/ipin.sym} -230 0 0 0 {name=p6 lab=VINJECT}
 C {devices/switch.sym} -170 0 1 0 {name=G1 TABLE="1.0 1G 2.0 10"}
-C {devices/ipin.sym} -240 -40 0 0 {name=p7 lab=STOP}
-C {devices/ipin.sym} -170 -90 0 0 {name=p8 lab=START}
+C {devices/ipin.sym} -240 -40 0 0 {name=p7 lab=VSTOP}
+C {devices/ipin.sym} -170 -90 0 0 {name=p8 lab=VSTART}

@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut xtal_osc
-XDUT VDD VSS VSS VSS VOUT INJECT STOP START  xtal_osc
+XDUT VDD VSS VSS VSS VOUT VINJECT VSTOP VSTART  xtal_osc

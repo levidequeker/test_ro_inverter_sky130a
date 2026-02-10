@@ -24,9 +24,9 @@
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
 VDD  VDD  VSS  pwl 0 0 10n {AVDD}
-START START VSS pwl 0 0 1n 5 305000n 5 305001n 0
-STOP STOP VSS  pwl 0 0 305001n 0 305002n 5 305010n 5 305011n 0
-INJECT INJECT VSS pulse(0 1 0 1n 1n 15.625u 31.25u)
+VSTART VSTART VSS pwl 0 0 1n 5 305000n 5 305001n 0
+VSTOP VSTOP VSS  pwl 0 0 305001n 0 305002n 5 305010n 5 305011n 0
+VINJECT VINJECT VSS pulse(0 1 0 1n 1n 15.625u 31.25u)
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
