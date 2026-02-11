@@ -5,7 +5,7 @@
 #ifdef Lay
 .include ../../../work/lpe/xtal_osc_lpe.spi
 #else
-.include ../../../work/xsch/xtal_osc.spice
+.include ../../../work/xsch/xtal_osc_adapted.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -24,9 +24,6 @@
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
 VDD  VDD  VSS  pwl 0 0 10n {AVDD}
-VSTART VSTART VSS pwl 0 0 1n 5 305000n 5 305001n 0
-VSTOP VSTOP VSS  pwl 0 0 305001n 0 305002n 5 305010n 5 305011n 0
-VINJECT VINJECT VSS pulse(0 1 0 1n 1n 15.625u 31.25u)
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -35,8 +32,7 @@ VINJECT VINJECT VSS pulse(0 1 0 1n 1n 15.625u 31.25u)
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(VOUT) v(INJECT)
-
+.save v(VDD) v(VOUT) i(xdut.x1.L1)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -49,12 +45,10 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
-
-tran 50n 70u 1p
+tran 50n 300u uic
 write
 quit
 
 
 .endc
-
 .end

@@ -17,7 +17,7 @@ test:
 	${MAKE} typical OPT="Debug"
 
 typical: netlist
-	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Att Tt Vt
+	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt Vt
 
 slow: netlist
 	cicsim run --name ${VIEW}_slow ${TB} ${OPT} ${VIEW} Gt Kss "Th,Tl" Vl

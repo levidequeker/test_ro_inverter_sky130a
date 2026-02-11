@@ -24,12 +24,13 @@ N -110 -300 -20 -300 {lab=#net1}
 N -110 -300 -110 -160 {lab=#net1}
 N 40 -300 110 -300 {lab=VOUT}
 N 110 -300 110 -160 {lab=VOUT}
-N -140 0 -110 0 {lab=#net1}
-N -230 0 -200 0 {lab=INJECT}
-N -170 -90 -170 -40 {lab=VSTART}
-N -240 -40 -190 -40 {lab=VSTOP}
+N -10 -170 -10 -150 {lab=VOUT}
+N -10 -160 80 -160 {lab=VOUT}
+N -70 -200 -50 -200 {lab=#net1}
+N -70 -200 -70 -120 {lab=#net1}
+N -70 -120 -50 -120 {lab=#net1}
+N -100 -160 -70 -160 {lab=#net1}
 C {THESIS_EXP_RO_INVERTER_SKY130A/xtal.sym} -20 0 0 0 {name=x1}
-C {THESIS_EXP_RO_INVERTER_SKY130A/INV_LVT.sym} 50 -160 0 0 {name=x2}
 C {devices/capa.sym} -110 60 0 0 {name=C1
 m=1
 value=6p
@@ -50,7 +51,31 @@ value=500Meg
 footprint=1206
 device=resistor
 m=1}
-C {devices/ipin.sym} -230 0 0 0 {name=p6 lab=VINJECT}
-C {devices/switch.sym} -170 0 1 0 {name=G1 TABLE="1.0 1G 2.0 10"}
-C {devices/ipin.sym} -240 -40 0 0 {name=p7 lab=VSTOP}
-C {devices/ipin.sym} -170 -90 0 0 {name=p8 lab=VSTART}
+C {sky130_fd_pr/pfet_01v8_lvt.sym} -30 -200 0 0 {name=M1[9:0]
+W=8.32
+L=0.42
+nf=1
+mult=1
+ad="'int((nf+1)/2) * W/nf * 0.29'" 
+pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
+as="'int((nf+2)/2) * W/nf * 0.29'" 
+ps="'2*int((nf+2)/2) * (W/nf + 0.29)'"
+nrd="'0.29 / W'" nrs="'0.29 / W'"
+sa=0 sb=0 sd=0
+model=pfet_01v8_lvt
+spiceprefix=X
+}
+C {sky130_fd_pr/nfet_01v8_lvt.sym} -30 -120 0 0 {name=M2[9:0]
+W=3.2
+L=0.42
+nf=1
+mult=1
+ad="'int((nf+1)/2) * W/nf * 0.29'" 
+pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
+as="'int((nf+2)/2) * W/nf * 0.29'" 
+ps="'2*int((nf+2)/2) * (W/nf + 0.29)'"
+nrd="'0.29 / W'" nrs="'0.29 / W'"
+sa=0 sb=0 sd=0
+model=nfet_01v8_lvt
+spiceprefix=X
+}
