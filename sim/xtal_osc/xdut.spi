@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut xtal_osc
-XDUT VDD VSS VSS VSS VOUT  xtal_osc
+XDUT VDD VSS VSS VSS VOUT_R VOUT_L  xtal_osc

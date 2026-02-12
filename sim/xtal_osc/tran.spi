@@ -32,7 +32,7 @@ VDD  VDD  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(VOUT) i(xdut.x1.L1)
+.save v(VDD) v(VOUT_R) v(VOUT_L) i(xdut.x1.L1)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -45,7 +45,7 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
-tran 50n 300u uic
+tran 50n 100m uic
 write
 quit
 
