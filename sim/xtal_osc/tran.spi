@@ -23,7 +23,7 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS  pwl 0 0 10n 0.2
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -32,7 +32,7 @@ VDD  VDD  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(VOUT_R) v(VOUT_L) i(xdut.x1.L1)
+.save v(VDD) v(VOUT_R) v(VOUT_L) i(xdut.x1.L1) i(VDD)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -44,11 +44,13 @@ set color1=black
 unset askquit
 
 optran 0 0 0 1n 1u 0
-
-tran 50n 100m uic
+print @xdut.XM2<0>[gm]
+print @xdut.XM1<0>[gm]
+tran 50n 50m uic
 write
 quit
 
 
 .endc
 .end
+
