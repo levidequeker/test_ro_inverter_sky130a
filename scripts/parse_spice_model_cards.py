@@ -3,7 +3,7 @@ import re
 import pandas as pd
 
 # Path to your .pm3.spice file
-spice_file = "sky130_fd_pr__nfet_03v3_nvt.pm3.spice"
+spice_file = "sky130_fd_pr__pfet_01v8.pm3.spice"
 spice_path = os.path.join("/opt/pdk/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice",spice_file)
 
 # Regular expression to match a model line with Lmin, Lmax, Wmin, Wmax
