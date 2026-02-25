@@ -5,7 +5,7 @@
 #ifdef Lay
 .include ../../../work/lpe/xtal_osc_schmitt_lpe.spi
 #else
-.include ../../../work/xsch/xtal_osc_schmitt.spice
+.include ../../../work/xsch/xtal_osc_schmitt_adapted.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -24,7 +24,7 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS  pwl 0 0 10n 0.2
 
 *-----------------------------------------------------------------
 * DUT
@@ -49,7 +49,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 10n 1p
+tran 50n 50m uic
 write
 quit
 

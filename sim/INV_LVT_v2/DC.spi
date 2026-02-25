@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/INV_LVT_SCHMITT_v2_lpe.spi
+.include ../../../work/lpe/INV_LVT_v2_lpe.spi
 #else
-.include ../../../work/xsch/INV_LVT_SCHMITT_v2.spice
+.include ../../../work/xsch/INV_LVT_v2.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -18,14 +18,14 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = {vdda}
 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 10n {AVDD}
-VIN vin VSS pwl 0 0 15u {AVDD} 30u 0
+VDD  VDD  VSS dc 1.8
+VIN  Vin VSS dc 0
+
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -46,10 +46,10 @@ set color0=white
 set color1=black
 unset askquit
 
-optran 0 0 0 1n 1u 0
+dc VIN 0 1.8 1m
 
+plot v(Vout) vs v(Vin)
 
-tran 1n 30u 1p
 write
 quit
 
