@@ -4,10 +4,10 @@ all: typical etc mc summary
 
 
 
-TB=DC
+TB=tran
 VIEW=Sch
 #VIEW=Lay
-CELL=INV_LVT
+CELL=INV_LVT_v2
 LIB =THESIS_EXP_RO_INVERTER_SKY130A
 OPT=
 
