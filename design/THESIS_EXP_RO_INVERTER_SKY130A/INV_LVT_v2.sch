@@ -14,9 +14,9 @@ N -50 -70 -50 50 {lab=Vin}
 N -50 -70 -40 -70 {lab=Vin}
 N -70 0 -50 0 {lab=Vin}
 N 0 0 90 -0 {lab=Vout}
-C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 50 0 0 {name=M1[9:0]
-W=3.2
-L=0.42
+C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 50 0 0 {name=M1[79:0]
+W=7
+L=0.5
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -28,9 +28,9 @@ sa=0 sb=0 sd=0
 model=nfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[9:0]
-W=8.32
-L=0.42
+C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[7:0]
+W=8
+L=0.5
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
