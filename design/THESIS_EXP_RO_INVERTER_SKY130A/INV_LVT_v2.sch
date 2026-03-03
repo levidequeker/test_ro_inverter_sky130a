@@ -6,15 +6,20 @@ S {}
 E {}
 N -70 -130 0 -130 {lab=VDD}
 N 0 -130 0 -100 {lab=VDD}
-N 0 -40 0 20 {lab=Vout}
-N 0 80 -0 120 {lab=VSS}
-N -60 120 -0 120 {lab=VSS}
-N -50 50 -40 50 {lab=Vin}
-N -50 -70 -50 50 {lab=Vin}
 N -50 -70 -40 -70 {lab=Vin}
-N -70 0 -50 0 {lab=Vin}
-N 0 0 90 -0 {lab=Vout}
-C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 50 0 0 {name=M1[79:0]
+N -0 -40 0 -10 {lab=#net1}
+N 0 50 0 70 {lab=Vout}
+N -0 130 0 160 {lab=#net2}
+N -0 220 0 250 {lab=VSS}
+N -0 60 100 60 {lab=Vout}
+N -120 60 -100 60 {lab=Vin}
+N -100 -70 -100 60 {lab=Vin}
+N -100 -70 -50 -70 {lab=Vin}
+N -100 60 -100 190 {lab=Vin}
+N -100 190 -40 190 {lab=Vin}
+N -70 250 -50 250 {lab=VSS}
+N -50 250 -0 250 {lab=VSS}
+C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 190 0 0 {name=M1[79:0]
 W=7
 L=0.5
 nf=1
@@ -43,6 +48,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {devices/ipin.sym} -70 -130 0 0 {name=p1 lab=VDD}
-C {devices/ipin.sym} -60 120 0 0 {name=p2 lab=VSS}
-C {devices/ipin.sym} -70 0 0 0 {name=p3 lab=Vin}
-C {devices/opin.sym} 90 0 0 0 {name=p4 lab=Vout}
+C {devices/ipin.sym} -70 250 0 0 {name=p2 lab=VSS}
+C {devices/ipin.sym} -120 60 0 0 {name=p3 lab=Vin}
+C {devices/opin.sym} 100 60 0 0 {name=p4 lab=Vout}
+C {devices/vsource.sym} 0 20 0 0 {name=V1 value=0 savecurrent=true}
+C {devices/vsource.sym} 0 100 0 0 {name=V2 value=0 savecurrent=true}
