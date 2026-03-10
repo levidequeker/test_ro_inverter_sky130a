@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut INV_LVT_SCHMITT_v2
-XDUT VSS Vin Vout VDD  INV_LVT_SCHMITT_v2
+XDUT VDD VSS Vout Vin  INV_LVT_SCHMITT_v2

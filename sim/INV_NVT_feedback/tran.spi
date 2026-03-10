@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_FET_lpe.spi
+.include ../../../work/lpe/INV_NVT_feedback_lpe.spi
 #else
-.include ../../../work/xsch/TB_FET.spice
+.include ../../../work/xsch/INV_NVT_feedback.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -24,8 +24,8 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 10n 0.1
-VG VG VSS pwl 0 0 100u 0.1
+VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+VIN VIN VSS pwl 0 0 15u {AVDD} 30u 0
 
 *-----------------------------------------------------------------
 * DUT
@@ -35,7 +35,7 @@ VG VG VSS pwl 0 0 100u 0.1
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+.save v(vin) v(vout) v(xdut.vn) i(v.xdut.v1) i(v.xdut.v3) i(v.xdut.v4) i(v.xdut.v5) v(xdut.vp) i(v.xdut.v2) i(v.xdut.v6)
 
 
 *----------------------------------------------------------------
@@ -50,7 +50,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 10n 100u 1p
+tran 100n 30u 1p
 write
 quit
 
