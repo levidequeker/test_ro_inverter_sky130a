@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut TB_FET
-XDUT VDD VSS VD VG  TB_FET
+XDUT VDD VSS VD VG Ibias1 Ibias2 Ibias3 Ibias4 Ibias5  TB_FET

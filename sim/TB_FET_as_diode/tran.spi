@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_FET_lpe.spi
+.include ../../../work/lpe/TB_FET_as_diode_lpe.spi
 #else
-.include ../../../work/xsch/TB_FET.spice
+.include ../../../work/xsch/TB_FET_as_diode.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -31,6 +31,18 @@ IBIAS2 IBIAS2 VSS pwl 0 0 100u 10u
 IBIAS3 IBIAS3 VSS pwl 0 0 100u 10u
 IBIAS4 IBIAS4 VSS pwl 0 0 100u 10u
 IBIAS5 IBIAS5 VSS pwl 0 0 100u 10u
+IBIAS6 IBIAS6 VSS pwl 0 0 100u 10u
+IBIAS7 IBIAS7 VSS pwl 0 0 100u 10u
+IBIAS8 IBIAS8 VSS pwl 0 0 100u 10u
+IBIAS9 IBIAS9 VSS pwl 0 0 100u 10u
+IBIAS10 IBIAS10 VSS pwl 0 0 100u 10u
+IBIAS11 IBIAS11 VSS pwl 0 0 100u 10u
+IBIAS12 IBIAS12 VSS pwl 0 0 100u 10u
+IBIAS13 IBIAS13 VSS pwl 0 0 100u 10u
+IBIAS14 IBIAS14 VSS pwl 0 0 100u 10u
+IBIAS15 IBIAS15 VSS pwl 0 0 100u 10u
+IBIAS16 IBIAS16 VSS pwl 0 0 100u 10u
+
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------

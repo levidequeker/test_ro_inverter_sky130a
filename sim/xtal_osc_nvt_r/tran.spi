@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_FET_lpe.spi
+.include ../../../work/lpe/xtal_osc_nvt_r_lpe.spi
 #else
-.include ../../../work/xsch/TB_FET.spice
+.include ../../../work/xsch/xtal_osc_nvt_r.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -24,13 +24,8 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 10n 0.2
-VG VG VSS pwl 0 0 100u 0.2
-IBIAS1 IBIAS1 VSS pwl 0 0 100u 10u
-IBIAS2 IBIAS2 VSS pwl 0 0 100u 10u
-IBIAS3 IBIAS3 VSS pwl 0 0 100u 10u
-IBIAS4 IBIAS4 VSS pwl 0 0 100u 10u
-IBIAS5 IBIAS5 VSS pwl 0 0 100u 10u
+VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -39,7 +34,7 @@ IBIAS5 IBIAS5 VSS pwl 0 0 100u 10u
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+.save v(vout_r) v(vout_l) v(vdd), i(vdd)
 
 
 *----------------------------------------------------------------
@@ -54,7 +49,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 10n 100u 1p
+tran 300n 10n uic
 write
 quit
 
