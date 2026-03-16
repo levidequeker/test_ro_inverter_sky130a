@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut INV_NVT_R
-XDUT VDD VSS VIN VOUT  INV_NVT_R
+XDUT VDD VOUT VIN VSS  INV_NVT_R

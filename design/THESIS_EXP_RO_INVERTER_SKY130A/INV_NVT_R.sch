@@ -25,7 +25,7 @@ C {devices/ipin.sym} -10 50 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} -30 0 0 0 {name=p3 lab=VIN}
 C {devices/opin.sym} 60 -40 0 0 {name=p4 lab=VOUT}
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 10 0 0 0 {name=M1
-W=4
+W=1
 L=0.6
 nf=1
 mult=1

@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/INV_NVT_feedback_lpe.spi
+.include ../../../work/lpe/INV_NVT_SCHMITT_lpe.spi
 #else
-.include ../../../work/xsch/INV_NVT_feedback.spice
+.include ../../../work/xsch/INV_NVT_SCHMITT.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -18,7 +18,8 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = {vdda}
+.param AVDD = 0.1
+.param VOB = 0.05
 
 *-----------------------------------------------------------------
 * FORCE
@@ -26,7 +27,7 @@
 VSS  VSS  0     dc 0
 VDD  VDD  VSS  pwl 0 0 10n {AVDD}
 VIN VIN VSS pwl 0 0 15u {AVDD} 30u 0
-
+VOUT VOUT VSS pwl 0 0 10n {VOB}
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -35,7 +36,7 @@ VIN VIN VSS pwl 0 0 15u {AVDD} 30u 0
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(vin) v(vout) v(xdut.vn) i(v.xdut.v1) i(v.xdut.v2) i(v.xdut.v3) i(v.xdut.v4)
+.save v(vin) v(vout) i(vout) v(vdd) v(xdut.vn) v(xdut.vp) i(v.xdut.v1) i(v.xdut.v2) i(v.xdut.v3) i(v.xdut.v4) i(v.xdut.v5) i(v.xdut.v6)
 
 
 *----------------------------------------------------------------

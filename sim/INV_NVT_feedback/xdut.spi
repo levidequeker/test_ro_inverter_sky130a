@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut INV_NVT_feedback
-XDUT VSS Vin Vout VDD  INV_NVT_feedback
+XDUT VDD VSS Vout Vin  INV_NVT_feedback
