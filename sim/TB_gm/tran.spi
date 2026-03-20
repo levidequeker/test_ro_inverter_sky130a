@@ -28,7 +28,12 @@
 VSS  VSS  0     dc 0
 VDD  VDD  VSS  pwl 0 0 10n {AVDD}
 VIN VIN VSS SIN({Voffset} {Vamp} 32768)
-VOUT VOUT VSS pwl 0 0 10n {Voffset}
+VOUT1 VOUT1 VSS pwl 0 0 10n {Voffset}
+VOUT2 VOUT2 VSS pwl 0 0 10n {Voffset}
+VOUT3 VOUT3 VSS pwl 0 0 10n {Voffset}
+VOUT4 VOUT4 VSS pwl 0 0 10n {Voffset}
+VOUT5 VOUT5 VSS pwl 0 0 10n {Voffset}
+
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -37,7 +42,7 @@ VOUT VOUT VSS pwl 0 0 10n {Voffset}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(vin) v(vout) v(vdd) i(vout)
+.save v(VIN) v(VOUT1) v(VDD) i(VOUT1) i(VOUT2) i(VOUT3) i(VOUT4) i(VOUT5)
 
 
 *----------------------------------------------------------------

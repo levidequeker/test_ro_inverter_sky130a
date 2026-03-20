@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut TB_gm
-XDUT VDD VSS VIN VOUT  TB_gm
+XDUT VDD VSS VIN VOUT1 VOUT2 VOUT3 VOUT4 VOUT5  TB_gm
