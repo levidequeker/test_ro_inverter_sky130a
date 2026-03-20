@@ -40,11 +40,11 @@ N 70 610 70 660 {lab=VSS}
 N 30 660 70 660 {lab=VSS}
 N 220 290 220 440 {lab=Vout}
 N 220 140 220 290 {lab=Vout}
-C {sky130_fd_pr/pfet_01v8_lvt.sym} 10 -30 0 0 {name=M1[99:0]
+C {sky130_fd_pr/pfet_01v8_lvt.sym} 10 -30 0 0 {name=M1[114:0]
 W=7
-L=1
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -54,11 +54,11 @@ sa=0 sb=0 sd=0
 model=pfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/pfet_01v8_lvt.sym} 10 140 0 0 {name=M2[19:0]
+C {sky130_fd_pr/pfet_01v8_lvt.sym} 10 140 0 0 {name=M2[22:0]
 W=7
-L=1
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -68,11 +68,11 @@ sa=0 sb=0 sd=0
 model=pfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/pfet_01v8_lvt.sym} 220 120 1 1 {name=M3
+C {sky130_fd_pr/pfet_01v8_lvt.sym} 220 120 1 1 {name=M3[1:0]
 W=7
-L=1
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -82,11 +82,11 @@ sa=0 sb=0 sd=0
 model=pfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/nfet_01v8_lvt.sym} 10 430 0 0 {name=M4[149:0]
-W=5
-L=1
+C {sky130_fd_pr/nfet_01v8_lvt.sym} 10 430 0 0 {name=M4[172:0]
+W=7
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -96,11 +96,11 @@ sa=0 sb=0 sd=0
 model=nfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/nfet_01v8_lvt.sym} 10 610 0 0 {name=M5[399:0]
-W=5
-L=1
+C {sky130_fd_pr/nfet_01v8_lvt.sym} 10 610 0 0 {name=M5[459:0]
+W=7
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -110,11 +110,11 @@ sa=0 sb=0 sd=0
 model=nfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/nfet_01v8_lvt.sym} 220 460 1 0 {name=M6[1:0]
-W=5
-L=1
+C {sky130_fd_pr/nfet_01v8_lvt.sym} 220 460 1 0 {name=M6[2:0]
+W=7
+L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 

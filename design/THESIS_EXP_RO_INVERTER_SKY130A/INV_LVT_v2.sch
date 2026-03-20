@@ -29,7 +29,7 @@ C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 190 0 0 {name=M1[599:0]
 W=7
 L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
@@ -39,11 +39,11 @@ sa=0 sb=0 sd=0
 model=nfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[79:0]
+C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[174:0]
 W=7
 L=0.5
 nf=1
-mult=1
+mult=2
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
 pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
 as="'int((nf+2)/2) * W/nf * 0.29'" 
