@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+
+# 1. Load the CSV file
+csv_file = "grid_search_results.csv"
+print(f"Loading {csv_file}...")
+df = pd.read_csv(csv_file)
+
+# 2. Helper function to safely parse complex strings from Pandas
+def parse_complex(val):
+    if isinstance(val, str):
+        # Remove any parentheses or spaces Pandas might have added
+        val = val.replace('(', '').replace(')', '').replace(' ', '')
+        return complex(val)
+    # If it's already a numeric type, just cast to complex
+    return complex(val)
+
+# 3. Apply the conversion
+complex_gm = df['gm'].apply(parse_complex)
+
+# 4. Extract the correct gm magnitude
+# As discussed, the inverter phase shift makes the real part negative.
+# We take -1 * real part to get the positive strength for our mathematical optimum.
+df['gm'] = np.min(0,np.real(complex_gm))
+
+# 5. Recalculate the Figure of Merit (FoM)
+df['fom'] = df['gm'] / (100 + df['m_alpha']*4 + df['m_beta'] + df['m_gamma'])
+
+# 6. Save it back to the CSV, overwriting the old one
+df.to_csv(csv_file, index=False)
+
+# 7. Print a quick summary to verify
+print("\nSuccess! Recalculated gm and FoM using the negative real part.")
+print("Here is a preview of the updated data:")
+print(df[['m_beta', 'm_gamma', 'gm', 'area', 'fom']].head())
+
+# Find the new optimum to show the user
+best_design = df.loc[df['fom'].idxmax()]
+print("\n" + "="*50)
+print("NEW BEST PHYSICAL DESIGN")
+print("="*50)
+print(f"Multipliers : m_beta={best_design['m_beta']:.0f}, m_gamma={best_design['m_gamma']:.0f}, m_alpha={best_design['m_alpha']:.0f}")
+print(f"Corrected gm: {best_design['gm']:.3e} S")
+print(f"Max FoM     : {best_design['fom']:.3e}")

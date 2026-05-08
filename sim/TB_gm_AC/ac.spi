@@ -7,6 +7,8 @@
 #else
 .include ../../../work/xsch/TB_gm_AC.spice
 #endif
+*.include sweep_params.spi
+.include sweep_sizes.spi
 
 *-----------------------------------------------------------------
 * OPTIONS
@@ -18,7 +20,7 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = 0.1
+*.param AVDD = 0.1
 
 *-----------------------------------------------------------------
 * FORCE
@@ -49,7 +51,7 @@ set color1=black
 unset askquit
 
 
-ac dec 100 1 32768
+ac dec 10 1 32768
 write
 quit
 
