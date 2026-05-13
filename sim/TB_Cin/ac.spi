@@ -19,7 +19,7 @@
 .param TRF = 10p
 
 .param AVDD = 0.1
-.param m_alpha = 157
+.param m_alpha = 175
 .param m_I0 = 31
 .param m_beta = 8
 .param m_gamma = 47

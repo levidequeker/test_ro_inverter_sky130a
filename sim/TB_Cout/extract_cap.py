@@ -91,13 +91,15 @@ for raw_file in new_raw_files:
             i_vout_32k = df[ivout_col].iloc[-1]
             v_vout_32k = df[vvout_col].iloc[-1]
 
-            z_out_32k = v_vout_32k / i_vout_32k
+            y_out_32k = -i_vout_32k / v_vout_32k
 
             # Keep only imaginary part to extract capacitance
-            z_out_32k_imag = np.imag(z_out_32k)
+            y_out_32k_real = np.real(y_out_32k)
+            y_out_32k_imag = np.imag(y_out_32k)
 
             # Get capacitance
-            C = 1/(-z_out_32k_imag * 2 * np.pi * 32768)
-            print(f"Cin = {C}")        
+            C = y_out_32k_imag/(2 * np.pi * 32768)
+            R = 1/y_out_32k_real
+            print(f"Cout = {C}, Ro = {R}")        
     except Exception as e:
         print(f" (Error parsing {raw_file}: {e})", end="")

@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_Cin_lpe.spi
+.include ../../../work/lpe/TB_Cout_lpe.spi
 #else
-.include ../../../work/xsch/TB_Cin.spice
+.include ../../../work/xsch/TB_Cout.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -19,7 +19,7 @@
 .param TRF = 10p
 
 .param AVDD = 0.1
-.param m_alpha = 157
+.param m_alpha = 175
 .param m_I0 = 31
 .param m_beta = 8
 .param m_gamma = 47
