@@ -17,33 +17,19 @@ N -110 -300 -20 -300 {lab=VOUT_L}
 N -110 -300 -110 -160 {lab=VOUT_L}
 N -100 -160 -70 -160 {lab=VOUT_L}
 N -130 -160 -110 -160 {lab=VOUT_L}
-N 330 -260 370 -260 {lab=VDD}
-N 370 -260 370 -210 {lab=VDD}
-N 340 -70 370 -70 {lab=VSS}
-N 370 -110 370 -70 {lab=VSS}
-N 250 -160 280 -160 {lab=#net2}
 N 420 -160 460 -160 {lab=VOUT_R}
-N 40 -300 90 -300 {lab=#net3}
-N 90 -300 130 -300 {lab=#net3}
-N 190 -300 260 -300 {lab=#net2}
-N 260 -300 300 -300 {lab=#net2}
-N 360 -300 440 -300 {lab=VOUT_R}
-N 440 -300 440 -160 {lab=VOUT_R}
+N 40 -300 90 -300 {lab=VOUT_R}
 N 110 0 430 -0 {lab=#net1}
 N 430 -0 440 0 {lab=#net1}
 N 440 -160 440 -110 {lab=VOUT_R}
 N 440 -50 440 -0 {lab=#net1}
-N 70 -160 110 -160 {lab=#net3}
+N 70 -160 110 -160 {lab=VOUT_R}
 N -10 -70 20 -70 {lab=VSS}
 N 20 -110 20 -70 {lab=VSS}
-N 170 -70 200 -70 {lab=VSS}
-N 200 -110 200 -70 {lab=VSS}
 N 20 -260 20 -210 {lab=VDD}
 N -10 -260 20 -260 {lab=VDD}
-N 160 -260 200 -260 {lab=VDD}
-N 200 -260 200 -210 {lab=VDD}
-N 90 -300 90 -160 {lab=#net3}
-N 270 -300 270 -160 {lab=#net2}
+N 90 -300 90 -160 {lab=VOUT_R}
+N 110 -160 420 -160 {lab=VOUT_R}
 C {THESIS_EXP_RO_INVERTER_SKY130A/xtal.sym} -20 0 0 0 {name=x1}
 C {devices/capa.sym} -110 60 0 0 {name=C1
 m=1
@@ -64,27 +50,11 @@ footprint=1206
 device=resistor
 m=1}
 C {devices/opin.sym} -130 -160 2 0 {name=p6 lab=VOUT_L}
-C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback.sym} 280 -160 0 0 {name=x4}
-C {devices/ipin.sym} 330 -260 0 0 {name=p8 lab=VDD}
-C {devices/ipin.sym} 340 -70 0 0 {name=p10 lab=VSS}
-C {devices/res.sym} 160 -300 3 0 {name=R2
-value=50Meg
-footprint=1206
-device=resistor
-m=1}
-C {devices/res.sym} 330 -300 3 0 {name=R3
-value=50Meg
-footprint=1206
-device=resistor
-m=1}
 C {devices/res.sym} 440 -80 0 0 {name=R4
 value=40k
 footprint=1206
 device=resistor
 m=1}
-C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback.sym} 110 -160 0 0 {name=x2}
 C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback.sym} -70 -160 0 0 {name=x3}
-C {devices/ipin.sym} 160 -260 0 0 {name=p1 lab=VDD}
 C {devices/ipin.sym} -10 -260 0 0 {name=p2 lab=VDD}
-C {devices/ipin.sym} 170 -70 0 0 {name=p7 lab=VSS}
 C {devices/ipin.sym} -10 -70 0 0 {name=p9 lab=VSS}

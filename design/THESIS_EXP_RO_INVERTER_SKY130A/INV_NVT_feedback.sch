@@ -65,8 +65,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 30 380 0 0 {name=M2
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_beta
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -79,8 +79,8 @@ model=nfet_03v3_nvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 30 530 0 0 {name=M3
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_I0
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -93,8 +93,8 @@ model=nfet_03v3_nvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 240 400 1 0 {name=M4
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_gamma
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
