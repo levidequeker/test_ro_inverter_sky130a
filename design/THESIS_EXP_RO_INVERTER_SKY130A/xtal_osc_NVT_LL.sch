@@ -38,7 +38,7 @@ footprint=1206
 device="ceramic capacitor"}
 C {devices/capa.sym} 110 60 0 0 {name=C2
 m=1
-value=6p
+value=5.25p
 footprint=1206
 device="ceramic capacitor"}
 C {devices/ipin.sym} -110 100 3 0 {name=p3 lab=VSS}
@@ -51,10 +51,10 @@ device=resistor
 m=1}
 C {devices/opin.sym} -130 -160 2 0 {name=p6 lab=VOUT_L}
 C {devices/res.sym} 440 -80 0 0 {name=R4
-value=140k
+value=40k
 footprint=1206
 device=resistor
 m=1}
-C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback.sym} -70 -160 0 0 {name=x3}
 C {devices/ipin.sym} -10 -260 0 0 {name=p2 lab=VDD}
 C {devices/ipin.sym} -10 -70 0 0 {name=p9 lab=VSS}
+C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback_longer.sym} -10 -160 0 0 {name=x2}

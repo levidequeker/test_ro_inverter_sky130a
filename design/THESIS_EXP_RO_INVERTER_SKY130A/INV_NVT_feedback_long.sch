@@ -4,14 +4,10 @@ K {}
 V {}
 S {}
 E {}
-T {To perform the
- - gm AC gridsearch (TB_gm_AC)
- - gm AC VDD sweep (TB_gm_AC)
-replace mult = 1 with 
- - m_alpha (M1)
- - m_beta (M2)
- - 100 (M3)
- - m_gamma (M4)} 470 100 0 0 0.4 0.4 {}
+T {Longer NFETs
+Longer because this changes Rout, which was too low to drive the xtal in the normal version
+Note that they onlyt have this in width 0.42
+So multiply! Note that changing L --> changing W/L --> changing gm} 170 80 0 0 0.4 0.4 {}
 N 50 330 50 350 {lab=Vout}
 N 50 410 50 430 {lab=vn}
 N 50 490 50 500 {lab=vn}
@@ -42,10 +38,10 @@ N -30 120 10 120 {lab=Vin}
 N 50 120 80 120 {lab=VDD}
 N 80 90 80 120 {lab=VDD}
 N 50 90 80 90 {lab=VDD}
-N 50 170 50 230 {lab=Vout}
-N 50 270 50 330 {lab=Vout}
-N 110 420 170 420 {lab=vn}
 N 50 430 50 490 {lab=vn}
+N 110 420 170 420 {lab=vn}
+N 50 270 50 330 {lab=Vout}
+N 50 170 50 230 {lab=Vout}
 C {devices/ipin.sym} -360 150 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} -80 330 0 0 {name=p3 lab=Vin}
 C {devices/opin.sym} 320 260 2 1 {name=p4 lab=Vout}
@@ -69,8 +65,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 30 380 0 0 {name=M2
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_beta
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -83,8 +79,8 @@ model=nfet_03v3_nvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 30 530 0 0 {name=M3
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_I0
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -97,8 +93,8 @@ model=nfet_03v3_nvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_03v3_nvt.sym} 240 400 1 0 {name=M4
-W=1
-L=0.6
+W=0.42
+L=0.8
 nf=1
 mult=m_gamma
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
