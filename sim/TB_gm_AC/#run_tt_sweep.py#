@@ -67,7 +67,7 @@ def toDataFrames(ngarr):
 # ==============================================================================
 # 2. USER CONFIGURATION
 # ==============================================================================
-RUN_SIMULATION = True
+RUN_SIMULATION = False
 
 # The exact terminal command you use to trigger the ETC sweep.
 # E.g., ["make", "etc"] or ["cicsim", "run", "ac", "etc"]
@@ -81,7 +81,7 @@ if RUN_SIMULATION:
     
     # Load parameters, ignoring spaces after commas
     # sizes = pd.read_csv("vdd_gm_sweep_sizes.csv", skipinitialspace=True)
-    sizes = pd.read_csv("vdd_gm_sweep_1size.csv", skipinitialspace=True)
+    sizes = pd.read_csv("vdd_gm_sweep_1size_long.csv", skipinitialspace=True)
     sizes.columns = sizes.columns.str.replace('"', '') 
     
     vdd_list = []

@@ -68,8 +68,7 @@ SIM_COMMAND =["make", "typical"]
 os.makedirs("output_ac", exist_ok=True)
 
 vdd_array = np.arange(50, 210, 10)/1000
-Cout_list = []
-Rout_list = []
+Cin_list = []
 
 for vdd in vdd_array:
     with open("output_ac/current_vdd.spi", "w") as f:
@@ -93,28 +92,28 @@ for vdd in vdd_array:
                 
             # Some raw files have multiple Monte Carlo plots inside them
             for df in dfs:
-                ivout_col = next(col for col in df.columns if 'i(vout)' in col.lower())
-                vvout_col = next(col for col in df.columns if 'v(vout)' in col.lower())                    
+                ivin_col = next(col for col in df.columns if 'i(vin)' in col.lower())
+                vvin_col = next(col for col in df.columns if 'v(vin)' in col.lower())
+                    
                 # Extract last frequency point, isolate Real part, invert sign
-                i_vout_32k = df[ivout_col].iloc[-1]
-                v_vout_32k = df[vvout_col].iloc[-1]
+                i_vin_32k = df[ivin_col].iloc[-1]
+                v_vin_32k = df[vvin_col].iloc[-1]
 
-                y_out_32k = -i_vout_32k / v_vout_32k
+                y_in_32k = -i_vin_32k / v_vin_32k
 
                 # Keep only imaginary part to extract capacitance
-                y_out_32k_real = np.real(y_out_32k)
-                y_out_32k_imag = np.imag(y_out_32k)
+                y_in_32k_real = np.real(y_in_32k)
+                y_in_32k_imag = np.imag(y_in_32k)
 
                 # Get capacitance
-                C = y_out_32k_imag/(2 * np.pi * 32768)
-                R = 1/y_out_32k_real
-                Cout_list.append(C)
-                Rout_list.append(R)
-                print(f"Cout = {C}, Ro = {R}")        
+                C = y_in_32k_imag/(2 * np.pi * 32768)
+                R = 1/y_in_32k_real
+                Cin_list.append(C)
+                print(f"Cin = {C}, Rin = {R}")        
         except Exception as e:
             print(f" (Error parsing {raw_file}: {e})", end="")
 
-Cout_array = np.array(Cout_list)
-Rout_array = np.array(Rout_list)
-df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout': Cout_array, 'Rout': Rout_array})
-df_summary.to_csv("Cout_NVT_summary.csv", index=False)
+
+Cin_array = np.array(Cin_list)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'Cin_LL': Cin_array})
+df_summary.to_csv("Cin_NVT_LL_summary.csv", index=False)

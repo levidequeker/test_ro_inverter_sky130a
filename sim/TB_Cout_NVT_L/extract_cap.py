@@ -94,7 +94,8 @@ for vdd in vdd_array:
             # Some raw files have multiple Monte Carlo plots inside them
             for df in dfs:
                 ivout_col = next(col for col in df.columns if 'i(vout)' in col.lower())
-                vvout_col = next(col for col in df.columns if 'v(vout)' in col.lower())                    
+                vvout_col = next(col for col in df.columns if 'v(vout)' in col.lower())
+                    
                 # Extract last frequency point, isolate Real part, invert sign
                 i_vout_32k = df[ivout_col].iloc[-1]
                 v_vout_32k = df[vvout_col].iloc[-1]
@@ -116,5 +117,5 @@ for vdd in vdd_array:
 
 Cout_array = np.array(Cout_list)
 Rout_array = np.array(Rout_list)
-df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout': Cout_array, 'Rout': Rout_array})
-df_summary.to_csv("Cout_NVT_summary.csv", index=False)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout_L': Cout_array, 'Rout_L': Rout_array})
+df_summary.to_csv("Cout_NVT_L_summary.csv", index=False)

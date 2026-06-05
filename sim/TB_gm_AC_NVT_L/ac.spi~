@@ -3,32 +3,34 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_Cout_lpe.spi
+.include ../../../work/lpe/TB_gm_AC_lpe.spi
 #else
-.include ../../../work/xsch/TB_Cout.spice
+.include ../../../work/xsch/TB_gm_AC_NVT_L.spice
 #endif
 .include current_vdd.spi
+
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-5
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
 
 *-----------------------------------------------------------------
 * PARAMETERS
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param m_alpha = 175
-.param m_I0 = 32
-.param m_beta = 8
-.param m_gamma = 47
+.param m_alpha = 555
+.param m_I0 = 98
+.param m_beta = 25
+.param m_gamma = 149
+
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
 VDD  VDD  VSS   dc {AVDD}
-VIN  VIN  VSS   dc {AVDD/2}  
-VOUT VOUT VSS   dc {AVDD/2} ac 1
+VIN  VIN  VSS   dc {AVDD/2}  ac 1
+VOUT VOUT VSS   dc {AVDD/2}
 
 *-----------------------------------------------------------------
 * DUT
@@ -38,7 +40,7 @@ VOUT VOUT VSS   dc {AVDD/2} ac 1
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VOUT) i(VOUT)
+.save v(VIN) v(VOUT) i(VOUT)
 
 
 *----------------------------------------------------------------

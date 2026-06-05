@@ -68,8 +68,7 @@ SIM_COMMAND =["make", "typical"]
 os.makedirs("output_ac", exist_ok=True)
 
 vdd_array = np.arange(50, 210, 10)/1000
-Cout_list = []
-Rout_list = []
+gm_list = []
 
 for vdd in vdd_array:
     with open("output_ac/current_vdd.spi", "w") as f:
@@ -99,22 +98,11 @@ for vdd in vdd_array:
                 i_vout_32k = df[ivout_col].iloc[-1]
                 v_vout_32k = df[vvout_col].iloc[-1]
 
-                y_out_32k = -i_vout_32k / v_vout_32k
-
-                # Keep only imaginary part to extract capacitance
-                y_out_32k_real = np.real(y_out_32k)
-                y_out_32k_imag = np.imag(y_out_32k)
-
-                # Get capacitance
-                C = y_out_32k_imag/(2 * np.pi * 32768)
-                R = 1/y_out_32k_real
-                Cout_list.append(C)
-                Rout_list.append(R)
-                print(f"Cout = {C}, Ro = {R}")        
+                gm_val = -np.real(i_vout_32k)
+                gm_list.append(gm_val)  
         except Exception as e:
             print(f" (Error parsing {raw_file}: {e})", end="")
 
-Cout_array = np.array(Cout_list)
-Rout_array = np.array(Rout_list)
-df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout': Cout_array, 'Rout': Rout_array})
-df_summary.to_csv("Cout_NVT_summary.csv", index=False)
+gm_array = np.array(gm_list)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'gm': gm_array})
+df_summary.to_csv("gm_NVT_L_summary.csv", index=False)

@@ -116,5 +116,5 @@ for vdd in vdd_array:
 
 Cout_array = np.array(Cout_list)
 Rout_array = np.array(Rout_list)
-df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout': Cout_array, 'Rout': Rout_array})
-df_summary.to_csv("Cout_NVT_summary.csv", index=False)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout_LL': Cout_array, 'Rout_LL': Rout_array})
+df_summary.to_csv("Cout_NVT_LL_summary.csv", index=False)

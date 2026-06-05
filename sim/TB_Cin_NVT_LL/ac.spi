@@ -3,28 +3,34 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/TB_gm_NVT_L_lpe.spi
+.include ../../../work/lpe/TB_Cin_lpe.spi
 #else
-.include ../../../work/xsch/TB_gm_NVT_L.spice
+.include ../../../work/xsch/TB_Cin_NVT_LL.spice
 #endif
+.include current_vdd.spi
 
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-5
 
 *-----------------------------------------------------------------
 * PARAMETERS
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = {vdda}
 
+.param m_alpha = 350
+.param m_I0 = 62
+.param m_beta = 16
+.param m_gamma = 94
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS   dc {AVDD}
+VIN  VIN  VSS   dc {AVDD/2}  ac 1
+VOUT VOUT VSS   dc {AVDD/2}
 
 *-----------------------------------------------------------------
 * DUT
@@ -34,7 +40,7 @@ VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+.save v(VIN) i(VIN)
 
 
 *----------------------------------------------------------------
@@ -46,10 +52,8 @@ set color0=white
 set color1=black
 unset askquit
 
-optran 0 0 0 1n 1u 0
 
-
-tran 1n 10n 1p
+ac dec 10 1 32768
 write
 quit
 

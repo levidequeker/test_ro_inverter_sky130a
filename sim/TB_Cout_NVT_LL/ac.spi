@@ -5,7 +5,7 @@
 #ifdef Lay
 .include ../../../work/lpe/TB_Cout_lpe.spi
 #else
-.include ../../../work/xsch/TB_Cout.spice
+.include ../../../work/xsch/TB_Cout_NVT_LL.spice
 #endif
 .include current_vdd.spi
 *-----------------------------------------------------------------
@@ -18,10 +18,10 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param m_alpha = 175
-.param m_I0 = 32
-.param m_beta = 8
-.param m_gamma = 47
+.param m_alpha = 350
+.param m_I0 = 62
+.param m_beta = 16
+.param m_gamma = 94
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------

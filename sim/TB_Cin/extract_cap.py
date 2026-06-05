@@ -67,39 +67,53 @@ SIM_COMMAND =["make", "typical"]
 
 os.makedirs("output_ac", exist_ok=True)
 
-# Clean up ANY old .raw files so we don't mix up runs
-old_raw_files = glob.glob("output_ac/*.raw")
-for old_file in old_raw_files:
-    os.remove(old_file)
+vdd_array = np.arange(50, 210, 10)/1000
+Cin_list = []
 
-print(f"Running typical...", end="", flush=True)
-subprocess.run(SIM_COMMAND)
+for vdd in vdd_array:
+    with open("output_ac/current_vdd.spi", "w") as f:
+        f.write(f".param AVDD = {vdd}\n")
+    
 
-new_raw_files = glob.glob("output_ac/*.raw")
-for raw_file in new_raw_files:
-    try:
-        # Get data
-        arrs, plots = ngRawRead(raw_file)
-        dfs = toDataFrames((arrs, plots))
+    # Clean up ANY old .raw files so we don't mix up runs
+    old_raw_files = glob.glob("output_ac/*.raw")
+    for old_file in old_raw_files:
+        os.remove(old_file)
+
+    print(f"Running typical...", end="", flush=True)
+    subprocess.run(SIM_COMMAND)
+
+    new_raw_files = glob.glob("output_ac/*.raw")
+    for raw_file in new_raw_files:
+        try:
+            # Get data
+            arrs, plots = ngRawRead(raw_file)
+            dfs = toDataFrames((arrs, plots))
                 
-        # Some raw files have multiple Monte Carlo plots inside them
-        for df in dfs:
-            ivin_col = next(col for col in df.columns if 'i(vin)' in col.lower())
-            vvin_col = next(col for col in df.columns if 'v(vin)' in col.lower())
+            # Some raw files have multiple Monte Carlo plots inside them
+            for df in dfs:
+                ivin_col = next(col for col in df.columns if 'i(vin)' in col.lower())
+                vvin_col = next(col for col in df.columns if 'v(vin)' in col.lower())
                     
-            # Extract last frequency point, isolate Real part, invert sign
-            i_vin_32k = df[ivin_col].iloc[-1]
-            v_vin_32k = df[vvin_col].iloc[-1]
+                # Extract last frequency point, isolate Real part, invert sign
+                i_vin_32k = df[ivin_col].iloc[-1]
+                v_vin_32k = df[vvin_col].iloc[-1]
 
-            y_in_32k = -i_vin_32k / v_vin_32k
+                y_in_32k = -i_vin_32k / v_vin_32k
 
-            # Keep only imaginary part to extract capacitance
-            y_in_32k_real = np.real(y_in_32k)
-            y_in_32k_imag = np.imag(y_in_32k)
+                # Keep only imaginary part to extract capacitance
+                y_in_32k_real = np.real(y_in_32k)
+                y_in_32k_imag = np.imag(y_in_32k)
 
-            # Get capacitance
-            C = y_in_32k_imag/(2 * np.pi * 32768)
-            R = 1/y_in_32k_real
-            print(f"Cin = {C}, Rin = {R}")        
-    except Exception as e:
-        print(f" (Error parsing {raw_file}: {e})", end="")
+                # Get capacitance
+                C = y_in_32k_imag/(2 * np.pi * 32768)
+                R = 1/y_in_32k_real
+                Cin_list.append(C)
+                print(f"Cin = {C}, Rin = {R}")        
+        except Exception as e:
+            print(f" (Error parsing {raw_file}: {e})", end="")
+
+
+Cin_array = np.array(Cin_list)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'Cin': Cin_array})
+df_summary.to_csv("Cin_NVT_summary.csv", index=False)

@@ -4,7 +4,7 @@ all: typical etc mc summary
 
 
 
-TB=tran
+TB=ac
 VIEW=Sch
 #VIEW=Lay
 CELL=TB_Cout_NVT_L
