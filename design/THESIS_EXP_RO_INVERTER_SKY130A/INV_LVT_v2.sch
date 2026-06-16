@@ -25,7 +25,7 @@ N 0 -110 40 -110 {lab=VDD}
 N -0 190 30 190 {lab=VSS}
 N 30 190 30 230 {lab=VSS}
 N 0 230 30 230 {lab=VSS}
-C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 190 0 0 {name=M1[599:0]
+C {sky130_fd_pr/nfet_01v8_lvt.sym} -20 190 0 0 {name=M1[10:0]
 W=7
 L=0.5
 nf=1
@@ -39,7 +39,7 @@ sa=0 sb=0 sd=0
 model=nfet_01v8_lvt
 spiceprefix=X
 }
-C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[174:0]
+C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 -70 0 0 {name=M2[10:0]
 W=7
 L=0.5
 nf=1

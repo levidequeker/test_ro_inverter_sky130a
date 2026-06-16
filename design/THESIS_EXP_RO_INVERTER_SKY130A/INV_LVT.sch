@@ -29,16 +29,16 @@ N -250 -390 -160 -390 {lab=Vout}
 N -250 -450 -200 -450 {lab=VDD}
 N -200 -480 -200 -450 {lab=VDD}
 N -250 -480 -200 -480 {lab=VDD}
-C {cborder/border_s.sym} 520 0 0 0 {
-user="wulff"
-company="wulff"}
+N -390 -390 -360 -390 {lab=Vin}
+N -410 -390 -390 -390 {lab=Vin}
+N -470 -390 -410 -390 {lab=Vin}
 C {devices/ipin.sym} -290 -530 0 0 {name=p1 lab=VDD}
 C {devices/ipin.sym} -290 -250 0 0 {name=p2 lab=VSS}
-C {devices/ipin.sym} -360 -390 0 0 {name=p3 lab=Vin}
+C {devices/ipin.sym} -470 -390 0 0 {name=p3 lab=Vin}
 C {devices/opin.sym} -160 -390 2 1 {name=p4 lab=Vout}
-C {sky130_fd_pr/nfet_01v8_lvt.sym} -270 -330 0 0 {name=M1[9:0]
-W=3.2
-L=0.42
+C {sky130_fd_pr/nfet_01v8_lvt.sym} -270 -330 0 0 {name=M1[90:0]
+W=1
+L=0.5
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -51,8 +51,8 @@ model=nfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} -270 -450 0 0 {name=M2[9:0]
-W=8.32
-L=0.42
+W=1
+L=0.5
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 

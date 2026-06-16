@@ -4,7 +4,7 @@ all: typical etc mc summary
 
 
 
-TB=dc
+TB=tran
 VIEW=Sch
 #VIEW=Lay
 CELL=TB_strength_LVT

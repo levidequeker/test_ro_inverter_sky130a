@@ -11,7 +11,7 @@
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-6
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -23,9 +23,10 @@
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
-VS  VS  0     dc 0.1
-VD  VD  0     dc 0
-VG  VG  0     dc 0.1
+VS  VS  0     dc 0
+VD  VD  0     pwl 0 0.1 10m 0.1 20m 0.1
+VG  VG  0     pwl 0 0.1 20m -0.6
+VB  VB  0     dc 0.1
 
 *-----------------------------------------------------------------
 * DUT
@@ -35,8 +36,7 @@ VG  VG  0     dc 0.1
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save i(VD)
-
+.save v(VG) v(VD)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -47,10 +47,33 @@ set color0=white
 set color1=black
 unset askquit
 
+
+save @m.xdut.xm1.sky130_fd_pr__pfet_01v8_lvt[gm]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[vdsat]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[id]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cgs]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cgg]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[csb]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cdb]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cgd]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[gds]
+
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 100n 1p
+tran 100n 20m 1p
+
+let id = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[id]
+let gm = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[gm]
+let gds = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[gds]
+let cgs = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cgs]
+let cgd = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cgd]
+let csb = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[csb]
+let cdb = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[cdb]
+let vdsat = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[vdsat]
+let vth = @m.xdut.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
+
 write
 quit
 

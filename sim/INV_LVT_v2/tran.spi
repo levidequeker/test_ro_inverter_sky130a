@@ -24,8 +24,8 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS dc  {AVDD}
-VIN Vin VSS PWL 0 0 15u {AVDD} 30u 0
+VDD  VDD  VSS dc 70m 
+VIN Vin VSS SIN(35m 35m 32768)
 
 *-----------------------------------------------------------------
 * DUT
@@ -50,7 +50,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 300n 30u 1p
+tran 100n 1m 1p
 write
 quit
 

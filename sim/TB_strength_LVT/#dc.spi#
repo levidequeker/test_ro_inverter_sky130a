@@ -3,15 +3,15 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/INV_LVT_lpe.spi
+.include ../../../work/lpe/TB_strength_LVT_lpe.spi
 #else
-.include ../../../work/xsch/INV_LVT.spice
-#endif
+.include ../../../work/xsch/TB_strength_LVT.spice
+#endif 
 
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-18 reltol=1e-5 abstol=1e-15 vabstol=1e-9
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -23,11 +23,9 @@
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
-VSS  VSS  0     dc 0
-VDD  VDD  VSS  dc 700m
-*pwl 0 0 10m 500m
-Vin Vin VSS dc 700m
-*SIN(350m 350m 32768)
+VS  VS  0     dc 0
+VD  VD  0     dc 0.1
+VG  VG  0     dc 0
 
 *-----------------------------------------------------------------
 * DUT
@@ -37,7 +35,7 @@ Vin Vin VSS dc 700m
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save  v(VDD) v(Vin) v(Vout)
+.save v(VG) v(VD)
 
 
 *----------------------------------------------------------------
@@ -49,10 +47,29 @@ set color0=white
 set color1=black
 unset askquit
 
-optran 0 0 0 1n 1u 0
+save @m.xdut.xm1.msky130_fd_pr__pfet_01v8[gm]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[vth]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[vdsat]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[id]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cgs]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cgg]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[csb]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cdb]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cgd]
++ @m.xdut.xm1.msky130_fd_pr__pfet_01v8[gds]
 
+dc VG 0 0.6 0.0001
 
-tran 100n 1m 1p
+let id = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[id]
+let gm = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[gm]
+let gds = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[gds]
+let cgs = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cgs]
+let cgd = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cgd]
+let csb = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[csb]
+let cdb = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[cdb]
+let vdsat = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[vdsat]
+let vth = @m.xdut.xm1.msky130_fd_pr__pfet_01v8[vth]
+
 write
 quit
 
