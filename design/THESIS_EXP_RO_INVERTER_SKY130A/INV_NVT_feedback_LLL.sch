@@ -31,14 +31,14 @@ N 50 60 50 90 {lab=VDD}
 N -30 200 -30 330 {lab=Vin}
 N -30 330 -30 380 {lab=Vin}
 N -30 380 -30 530 {lab=Vin}
-N 50 150 50 170 {lab=Vout}
+N 50 150 50 170 {lab=#net2}
 N -30 120 -30 200 {lab=Vin}
 N -30 120 10 120 {lab=Vin}
 N 50 120 80 120 {lab=VDD}
 N 80 90 80 120 {lab=VDD}
 N 50 90 80 90 {lab=VDD}
 N 50 270 50 280 {lab=Vout}
-N 50 340 50 350 {lab=#net2}
+N 50 340 50 350 {lab=#net3}
 N 50 310 100 310 {lab=VSS}
 N -30 310 10 310 {lab=Vin}
 N -30 460 10 460 {lab=Vin}
@@ -47,7 +47,8 @@ N 110 420 150 420 {lab=vn}
 N 180 350 180 380 {lab=Vout}
 N 180 350 240 350 {lab=Vout}
 N 180 420 180 440 {lab=VSS}
-N 50 170 50 230 {lab=Vout}
+N -30 200 10 200 {lab=Vin}
+N 50 200 90 200 {lab=VDD}
 C {devices/ipin.sym} -360 150 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} -80 330 0 0 {name=p3 lab=Vin}
 C {devices/opin.sym} 320 260 2 1 {name=p4 lab=Vout}
@@ -161,3 +162,18 @@ model=nfet_03v3_nvt
 spiceprefix=X
 }
 C {devices/lab_pin.sym} 180 440 3 0 {name=p15 sig_type=std_logic lab=VSS}
+C {sky130_fd_pr/pfet_01v8_lvt.sym} 30 200 0 0 {name=M8
+W=7
+L=0.35
+nf=1
+mult=m_alpha
+ad="'int((nf+1)/2) * W/nf * 0.29'" 
+pd="'2*int((nf+1)/2) * (W/nf + 0.29)'"
+as="'int((nf+2)/2) * W/nf * 0.29'" 
+ps="'2*int((nf+2)/2) * (W/nf + 0.29)'"
+nrd="'0.29 / W'" nrs="'0.29 / W'"
+sa=0 sb=0 sd=0
+model=pfet_01v8_lvt
+spiceprefix=X
+}
+C {devices/lab_pin.sym} 90 200 2 0 {name=p16 sig_type=std_logic lab=VDD}

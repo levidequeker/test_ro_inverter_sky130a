@@ -23,14 +23,16 @@ N 110 0 430 -0 {lab=VOUT_R}
 N 430 -0 440 0 {lab=VOUT_R}
 N 440 -160 440 -110 {lab=VOUT_R}
 N 440 -50 440 -0 {lab=VOUT_R}
-N 70 -160 110 -160 {lab=VOUT_R}
 N -10 -70 20 -70 {lab=VSS}
-N 20 -110 20 -70 {lab=VSS}
-N 20 -260 20 -210 {lab=VDD}
 N -10 -260 20 -260 {lab=VDD}
 N 90 -300 90 -160 {lab=VOUT_R}
 N 110 -160 420 -160 {lab=VOUT_R}
 N 440 -110 440 -50 {lab=VOUT_R}
+N 80 -160 110 -160 {lab=VOUT_R}
+N 30 -260 30 -220 {lab=VDD}
+N 20 -260 30 -260 {lab=VDD}
+N 20 -70 30 -70 {lab=VSS}
+N 30 -100 30 -70 {lab=VSS}
 C {THESIS_EXP_RO_INVERTER_SKY130A/xtal.sym} -20 0 0 0 {name=x1}
 C {devices/capa.sym} -110 60 0 0 {name=C1
 m=1
@@ -53,4 +55,4 @@ m=1}
 C {devices/opin.sym} -130 -160 2 0 {name=p6 lab=VOUT_L}
 C {devices/ipin.sym} -10 -260 0 0 {name=p2 lab=VDD}
 C {devices/ipin.sym} -10 -70 0 0 {name=p9 lab=VSS}
-C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback_longer.sym} -10 -160 0 0 {name=x2}
+C {THESIS_EXP_RO_INVERTER_SKY130A/INV_NVT_feedback_LLL.sym} -60 -160 0 0 {name=x2}

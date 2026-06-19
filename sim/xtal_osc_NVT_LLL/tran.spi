@@ -3,9 +3,9 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/xtal_osc_NVT_LL_lpe.spi
+.include ../../../work/lpe/xtal_osc_NVT_LLL_lpe.spi
 #else
-.include ../../../work/xsch/xtal_osc_NVT_LL.spice
+.include ../../../work/xsch/xtal_osc_NVT_LLL.spice
 #endif
 
 *-----------------------------------------------------------------
@@ -20,10 +20,9 @@
 
 .param AVDD = {vdda}
 .param m_I0 = 62
-.param m_alpha = 175
+.param m_alpha = 350
 .param m_beta = 16
-.param m_gamma = 94
-
+.param m_gamma = 94 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------

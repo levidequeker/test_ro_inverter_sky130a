@@ -19,12 +19,17 @@
 .param TRF = 10p
 
 .param AVDD = {vdda}
+.param m_I0 = 98
+.param m_alpha = 175
+.param m_beta = 25
+.param m_gamma = 149 
 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+
 
 *-----------------------------------------------------------------
 * DUT
@@ -34,7 +39,7 @@ VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+.save v(VDD) i(VDD) v(VOUT_L) v(VOUT_R)
 
 
 *----------------------------------------------------------------
@@ -46,10 +51,29 @@ set color0=white
 set color1=black
 unset askquit
 
+save @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
++ @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vgs]
++ @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vth]
++ @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vgs]
++ @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vth]
++ @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vgs]
++ @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vth]
++ @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vgs]
+
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 10n 1p
+tran 300n 500m 1p
+
+let vth_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
+let vgs_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vgs]
+let vth_n1 = @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vth]
+let vgs_n1 = @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vgs]
+let vth_n0 = @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vth]
+let vgs_n0 = @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vgs]
+let vth_n2 = @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vth]
+let vgs_n2 = @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vgs]
+
 write
 quit
 

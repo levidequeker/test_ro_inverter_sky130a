@@ -1,0 +1,9 @@
+* Measure xtal_osc_NVT_LLL
+.control
+
+load {cicname}.raw
+
+echo "MEAS_START"
+
+echo "MEAS_END"
+.endc
