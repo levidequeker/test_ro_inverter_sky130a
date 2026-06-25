@@ -1,2 +1,2 @@
 *Automatic generated instance fron ../../tech/scripts/genxdut TB_Cout_NVT_L
-XDUT VOUT VIN VSS VDD  TB_Cout_NVT_L
+XDUT VOUT VIN VSS VDD VDD_TRAN VIN_TRAN VSS_TRAN VOUT_TRAN  TB_Cout_NVT_L

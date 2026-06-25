@@ -5,13 +5,13 @@
 #ifdef Lay
 .include ../../../work/lpe/xtal_osc_NVT_LL_lpe.spi
 #else
-.include ../../../work/xsch/xtal_osc_NVT_LL.spice
+.include ../../../work/xsch/xtal_osc_NVT_LL_adapted.spice
 #endif
 
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-5
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -19,17 +19,23 @@
 .param TRF = 10p
 
 .param AVDD = {vdda}
-.param m_I0 = 62
-.param m_alpha = 175
-.param m_beta = 16
-.param m_gamma = 94
 
+*Scaled design
+.param m_alpha = 25
+.param m_beta = 3
+.param m_gamma = 8
+.param m_I0 = 4
+
+*Benchmark design
+*.param m_alpha = 59
+*.param m_beta = 9
+*.param m_gamma = 12
+*.param m_I0 = 10
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD  VSS  pwl 0 0 10n {AVDD}
-
+VDD  VDD  VSS  pwl 0 0 100n {AVDD}
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
@@ -38,8 +44,7 @@ VDD  VDD  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) i(VDD) v(VOUT_L) v(VOUT_R)
-
+.save all
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -50,33 +55,13 @@ set color0=white
 set color1=black
 unset askquit
 
-save @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
-+ @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vgs]
-+ @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vth]
-+ @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vgs]
-+ @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vth]
-+ @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vgs]
-+ @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vth]
-+ @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vgs]
-
 optran 0 0 0 1n 1u 0
 
-
-tran 300n 500m 1p
-
-let vth_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
-let vgs_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vgs]
-let vth_n1 = @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vth]
-let vgs_n1 = @m.xdut.x2.xm2.msky130_fd_pr__nfet_03v3_nvt[vgs]
-let vth_n0 = @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vth]
-let vgs_n0 = @m.xdut.x2.xm3.msky130_fd_pr__nfet_03v3_nvt[vgs]
-let vth_n2 = @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vth]
-let vgs_n2 = @m.xdut.x2.xm4.msky130_fd_pr__nfet_03v3_nvt[vgs]
-
+tran 300n 250m 0 1u uic
 write
 quit
 
 
 .endc
-
 .end
+

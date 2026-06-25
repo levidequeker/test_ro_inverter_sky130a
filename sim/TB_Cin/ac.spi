@@ -19,10 +19,10 @@
 .param TRF = 10p
 
 
-.param m_alpha = 175
-.param m_I0 = 31
-.param m_beta = 8
-.param m_gamma = 47
+.param m_alpha = 20
+.param m_I0 = 3
+.param m_beta = 2
+.param m_gamma = 8
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------

@@ -18,11 +18,19 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = 0.17
-.param m_alpha = {175*1}
-.param m_beta = {8*1}
-.param m_gamma = {47*1}
-.param m_I0 = {31*1}
+*Scaled design
+*.param AVDD = {vdda}
+*.param m_alpha = 20
+*.param m_beta = 2
+*.param m_gamma = 8
+*.param m_I0 = 3
+
+* Benchmark design
+.param AVDD = {vdda}
+.param m_alpha = 62
+.param m_beta = 5
+.param m_gamma = 24
+.param m_I0 = 10
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
@@ -36,7 +44,7 @@ VDD  VDD  VSS  pwl 0 0 100n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save v(VDD) v(VOUT_R) v(VOUT_L) i(VDD) v(M1) v(M2)
+.save all
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -49,7 +57,7 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
-tran 600n 500m 0 1u uic
+tran 300n 250m 0 1u uic
 write
 quit
 

@@ -1,0 +1,203 @@
+import os
+import glob
+import re
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# ==============================================================================
+# 1. CONFIGURATION (Define your 4 locations and labels here)
+# ==============================================================================
+LOCATIONS = {
+    "Design 1": "./xtal_osc/output_gm_min/typical_crystal",
+    "Design 2":    "./xtal_osc_NVT_L/output_gm_min/typical_crystal",
+    "Design 3":    "./xtal_osc_NVT_LL/output_gm_min/typical_crystal",
+    "Design 4":  "./xtal_osc_NVT_LLL/output_gm_min/typical_crystal"
+}
+
+# Portion of the transient simulation to discard (to ignore startup/settling time)
+# 0.5 means we only analyze the last 50% of the simulation window.
+STEADY_STATE_START_RATIO = 0.1 
+
+# ==============================================================================
+# 2. NGSPICE RAW PARSER (From cicsim)
+# ==============================================================================
+BSIZE_SP = 512
+MDATA_LIST =[b'title', b'date', b'plotname', b'flags', b'no. variables',
+              b'no. points', b'dimensions', b'command', b'option']
+
+def ngRawRead(fname: str):
+    fp = open(fname, 'rb')
+    plot = {}
+    arrs =[]
+    plots =[]
+    names = dict()
+    ind = 0
+    while (True):
+        try:
+            mdata = fp.readline(BSIZE_SP).split(b':', maxsplit=1)
+        except:
+            raise
+        if len(mdata) == 2:
+            if mdata[0].lower() in MDATA_LIST:
+                plot[mdata[0].lower()] = mdata[1].strip()
+            if mdata[0].lower() == b'variables':
+                nvars = int(plot[b'no. variables'])
+                npoints = int(plot[b'no. points'])
+                plot['varnames'] = []
+                plot['varunits'] =[]
+                for varn in range(nvars):
+                    varspec = (fp.readline(BSIZE_SP).strip().decode('ascii').split())
+                    assert(varn == int(varspec[0]))
+                    if(varspec[1] not in names):
+                        names[varspec[1]] = 1
+                    else:
+                        varspec[1] += str(ind)
+                        ind +=1
+                    plot['varnames'].append(varspec[1])
+                    plot['varunits'].append(varspec[2])
+            if mdata[0].lower() == b'binary':
+                rowdtype = np.dtype({'names': plot['varnames'],
+                                     'formats':[np.complex128 if b'complex'
+                                                 in plot[b'flags']
+                                                 else np.float64]*nvars})
+                arrs.append(np.fromfile(fp, dtype=rowdtype, count=npoints))
+                plots.append(plot)
+                fp.readline() 
+        else:
+            break
+    fp.close()
+    return (arrs, plots)
+
+def toDataFrames(ngarr):
+    (arrs, plots) = ngarr
+    dfs = list()
+    for i in range(0, len(plots)):
+        df = pd.DataFrame(data=arrs[i], columns=plots[i]['varnames'])
+        dfs.append(df)
+    return dfs
+
+# ==============================================================================
+# 3. DIRECTORY PROCESSING FUNCTION
+# ==============================================================================
+def process_directory(folder_path):
+    raw_files = glob.glob(os.path.join(folder_path, "*.raw"))
+    if not raw_files:
+        print(f"      No .raw files found in directory: '{folder_path}'")
+        return pd.DataFrame()
+
+    results = []
+    for raw_file in raw_files:
+        file_name = os.path.basename(raw_file)
+        
+        # Extract VDD (e.g., V140 -> 0.140 V)
+        match = re.search(r'[vV](\d+)', file_name)
+        if not match:
+            continue
+        vdd_val = float(match.group(1)) / 1000.0
+
+        try:
+            arrs, plots = ngRawRead(raw_file)
+            dfs = toDataFrames((arrs, plots))
+                
+            for df in dfs:
+                # Find columns
+                time_col = next((col for col in df.columns if col.lower() == 'time'), None)
+                ivdd_col = next((col for col in df.columns if 'i(vdd)' in col.lower() or ('i(v' in col.lower() and 'vdd' in col.lower())), None)
+                
+                if ivdd_col is None:
+                    ivdd_col = next((col for col in df.columns if 'vdd' in col.lower() and col.lower().startswith('i')), None)
+
+                if not all([time_col, ivdd_col]):
+                    continue
+                
+                # Chop first 50% for steady-state
+                total_time = df[time_col].iloc[-1]
+                steady_state_start = total_time * STEADY_STATE_START_RATIO
+                df_steady = df[df[time_col] >= steady_state_start]
+                
+                time = df_steady[time_col].values
+                i_vdd = df_steady[ivdd_col].values
+
+                # Instantaneous power (invert negative SPICE current direction)
+                inst_current = - i_vdd
+                inst_power = vdd_val * inst_current
+
+                # Integration using Trapezoidal Rule
+                dt = np.diff(time)
+                
+                p_mid = 0.5 * (inst_power[:-1] + inst_power[1:])
+                p_avg = np.sum(p_mid * dt) / (time[-1] - time[0])
+                
+                i_mid = 0.5 * (inst_current[:-1] + inst_current[1:])
+                i_avg = np.sum(i_mid * dt) / (time[-1] - time[0])
+
+                results.append({
+                    'VDD': vdd_val,
+                    'P_avg_W': p_avg,
+                    'I_avg_A': i_avg
+                })
+                
+        except Exception as e:
+            print(f"      Error parsing {file_name}: {e}")
+
+    if not results:
+        return pd.DataFrame()
+
+    # Convert, aggregate duplicate runs if they exist (e.g. multi-runs), and sort
+    df_res = pd.DataFrame(results)
+    df_res = df_res.groupby('VDD', as_index=False).mean()
+    df_res = df_res.sort_values(by='VDD').reset_index(drop=True)
+    return df_res
+
+# ==============================================================================
+# 4. EXECUTION LOOP & MULTI-PLOT
+# ==============================================================================
+all_data = []
+
+plt.figure(figsize=(10, 6))
+
+for label, folder in LOCATIONS.items():
+    print(f"Processing '{label}' from directory: {folder}...")
+    
+    # Process the folder
+    df_loc = process_directory(folder)
+    
+    if df_loc.empty:
+        print(f" -> Skipped or no data extracted from: {folder}\n")
+        continue
+    
+    print(f" -> Successfully processed {len(df_loc)} voltage points.\n")
+    
+    # Tag dataset for the global combined CSV
+    df_tagged = df_loc.copy()
+    df_tagged['Location'] = label
+    all_data.append(df_tagged)
+    
+    # Overlay on the unified matplotlib figure (converting Power to uW)
+    plt.plot(df_loc['VDD'], df_loc['P_avg_W'] * 1e6, 'o-', label=label, linewidth=1.5)
+
+# ==============================================================================
+# 5. POST-PROCESSING & SAVING
+# ==============================================================================
+if not all_data:
+    print("Error: No data was successfully processed from any folder!")
+    exit()
+
+# Combine dataframes and save to a single CSV
+df_combined = pd.concat(all_data, ignore_index=True)
+output_csv = "combined_power_summary.csv"
+df_combined.to_csv(output_csv, index=False)
+print(f"Combined data exported to {output_csv}\n")
+
+# Format and show the final plot
+plt.xlabel(r'$V_{DD,min}$ (V)', fontsize=12)
+plt.ylabel(r'Power Consumption ($\mu$W)', fontsize=12)
+plt.title('Oscillator Power Consumption vs. VDD (Comparison)', fontsize=14, fontweight='bold')
+plt.grid(True, which="both", linestyle="--", alpha=0.7)
+plt.legend(fontsize=10, loc="best")
+plt.tight_layout()
+
+# Save the combined plot image
+plt.savefig("combined_power_comparison.png", dpi=300)
+plt.show()

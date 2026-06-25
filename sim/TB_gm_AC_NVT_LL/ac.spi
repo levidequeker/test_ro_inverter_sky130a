@@ -8,28 +8,29 @@
 .include ../../../work/xsch/TB_gm_AC_NVT_LL.spice
 #endif
 .include current_vdd.spi
-
+*.include sweep_params.spi
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-3 rshunt=1e12
 
 *-----------------------------------------------------------------
 * PARAMETERS
 *-----------------------------------------------------------------
 .param TRF = 10p
+*.param AVDD = 0.1
 
-.param m_alpha = 350
-.param m_I0 = 62
-.param m_beta = 16
-.param m_gamma = 94
+.param m_alpha = 31
+.param m_I0 = 17
+.param m_beta = 15
+.param m_gamma = 20
 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
 VDD  VDD  VSS   dc {AVDD}
-VIN  VIN  VSS   dc {AVDD/2}  ac 1
+VIN  VIN  VSS   dc {OP}  ac 1
 VOUT VOUT VSS   dc {AVDD/2}
 
 *-----------------------------------------------------------------

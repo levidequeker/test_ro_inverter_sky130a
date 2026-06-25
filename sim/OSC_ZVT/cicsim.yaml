@@ -1,9 +1,0 @@
-options:
-  useTmpDir: False
-  sha: True
-corner:
-  Lay: ''
-  Sch: ''
-ngspice:
-  library: THESIS_EXP_RO_INVERTER_SKY130A
-  cell: OSC_ZVT

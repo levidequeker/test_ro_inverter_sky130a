@@ -5,13 +5,13 @@
 #ifdef Lay
 .include ../../../work/lpe/xtal_osc_NVT_LLL_lpe.spi
 #else
-.include ../../../work/xsch/xtal_osc_NVT_LLL.spice
+.include ../../../work/xsch/xtal_osc_NVT_LLL_adapted.spice
 #endif
 
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-5
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -19,10 +19,18 @@
 .param TRF = 10p
 
 .param AVDD = {vdda}
-.param m_I0 = 62
-.param m_alpha = 350
-.param m_beta = 16
-.param m_gamma = 94 
+
+*Scaled design
+*.param m_I0 = 17
+*.param m_alpha = 31
+*.param m_beta = 15
+*.param m_gamma = 20
+
+*Benchmark design
+.param m_I0 = 10
+.param m_alpha = 18
+.param m_beta = 9
+.param m_gamma = 12
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
@@ -61,7 +69,7 @@ save @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
 optran 0 0 0 1n 1u 0
 
 
-tran 300n 500m 1p
+tran 300n 250m 1p uic
 
 let vth_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vth]
 let vgs_p0 = @m.xdut.x2.xm1.msky130_fd_pr__pfet_01v8_lvt[vgs]

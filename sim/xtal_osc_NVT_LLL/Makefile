@@ -17,7 +17,10 @@ test:
 	${MAKE} typical OPT="Debug"
 
 typical: netlist
-	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt "V180,V190,V200"
+	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt "V135"
+
+typical_precise: netlist
+	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt "V114,V116,V118"
 
 slow: netlist
 	cicsim run --name ${VIEW}_slow ${TB} ${OPT} ${VIEW} Gt Kss "Th,Tl" Vl

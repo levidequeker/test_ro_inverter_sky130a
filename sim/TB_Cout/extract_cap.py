@@ -67,13 +67,20 @@ SIM_COMMAND =["make", "typical"]
 
 os.makedirs("output_ac", exist_ok=True)
 
-vdd_array = np.arange(50, 210, 10)/1000
+vdd_array = np.arange(100, 210, 5)/1000
 Cout_list = []
 Rout_list = []
 
+df_OP = pd.read_csv("OP_summary.csv")
+OP_array = df_OP["Vin"]
+
+
 for vdd in vdd_array:
+    OP_ctr = int((vdd*1000-100)/5)
+    OP = OP_array[OP_ctr]
     with open("output_ac/current_vdd.spi", "w") as f:
         f.write(f".param AVDD = {vdd}\n")
+        f.write(f".param OP = {OP}\n")
     
 
     # Clean up ANY old .raw files so we don't mix up runs
@@ -94,7 +101,8 @@ for vdd in vdd_array:
             # Some raw files have multiple Monte Carlo plots inside them
             for df in dfs:
                 ivout_col = next(col for col in df.columns if 'i(vout)' in col.lower())
-                vvout_col = next(col for col in df.columns if 'v(vout)' in col.lower())                    
+                vvout_col = next(col for col in df.columns if 'v(vout)' in col.lower())
+                    
                 # Extract last frequency point, isolate Real part, invert sign
                 i_vout_32k = df[ivout_col].iloc[-1]
                 v_vout_32k = df[vvout_col].iloc[-1]
@@ -116,5 +124,5 @@ for vdd in vdd_array:
 
 Cout_array = np.array(Cout_list)
 Rout_array = np.array(Rout_list)
-df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout': Cout_array, 'Rout': Rout_array})
-df_summary.to_csv("Cout_NVT_summary.csv", index=False)
+df_summary = pd.DataFrame({'VDD': vdd_array, 'Cout_L': Cout_array, 'Rout_L': Rout_array})
+df_summary.to_csv("Cout_NVT_L_summary.csv", index=False)

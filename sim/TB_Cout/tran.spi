@@ -7,24 +7,36 @@
 #else
 .include ../../../work/xsch/TB_Cout.spice
 #endif
-
+.include current_vdd.spi
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-3 rshunt=1e12
 
 *-----------------------------------------------------------------
 * PARAMETERS
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param AVDD = {vdda}
 
+.param m_alpha = 20
+.param m_I0 = 3
+.param m_beta = 2
+.param m_gamma = 8
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS dc 0
+VIN VIN VSS dc 0
+VOUT VOUT VSS dc 0
+
+VSS_TRAN  VSS_TRAN  0     dc 0
+VDD_TRAN  VDD_TRAN  VSS_TRAN  pwl 0 0 10n {AVDD}
+VIN_TRAN VIN_TRAN VSS_TRAN sin({AVDD/2} {AVDD/2} 32768
+*sin({AVDD/2} {AVDD/2} 32768)
+*pwl 0 0 971n {AVDD} 1942n 0
+*VOUT_TRAN VOUT_TRAN VSS_TRAN dc {AVDD/2}
 
 *-----------------------------------------------------------------
 * DUT
@@ -34,7 +46,7 @@ VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+.save v(vin_tran) i(vout_tran) v(vout_tran)
 
 
 *----------------------------------------------------------------
@@ -49,7 +61,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 10n 1p
+tran 10n 90u 1p
 write
 quit
 

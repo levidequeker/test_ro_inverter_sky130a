@@ -67,13 +67,20 @@ SIM_COMMAND =["make", "typical"]
 
 os.makedirs("output_ac", exist_ok=True)
 
-vdd_array = np.arange(50, 210, 10)/1000
+vdd_array = np.arange(100, 210, 5)/1000
 Cout_list = []
 Rout_list = []
 
+df_OP = pd.read_csv("OP_summary.csv")
+OP_array = df_OP["Vin"]
+
+
 for vdd in vdd_array:
+    OP_ctr = int((vdd*1000-100)/5)
+    OP = OP_array[OP_ctr]
     with open("output_ac/current_vdd.spi", "w") as f:
         f.write(f".param AVDD = {vdd}\n")
+        f.write(f".param OP = {OP}\n")
     
 
     # Clean up ANY old .raw files so we don't mix up runs
