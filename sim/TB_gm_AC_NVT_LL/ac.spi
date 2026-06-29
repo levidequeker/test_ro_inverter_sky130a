@@ -20,10 +20,29 @@
 .param TRF = 10p
 *.param AVDD = 0.1
 
-.param m_alpha = 31
-.param m_I0 = 17
-.param m_beta = 15
-.param m_gamma = 20
+*Scaled design 4
+*.param m_alpha = 31
+*.param m_I0 = 17
+*.param m_beta = 15
+*.param m_gamma = 20
+
+*Benchmarked design 4
+.param m_alpha = 18
+.param m_I0 = 10
+.param m_beta = 9
+.param m_gamma = 12
+
+*Scaled design 3
+*.param m_alpha = 25
+*.param m_I0 = 4
+*.param m_beta = 3
+*.param m_gamma = 8
+
+*Benchmarked design 3
+*.param m_alpha = 59
+*.param m_I0 = 10
+*.param m_beta = 7
+*.param m_gamma = 18
 
 *-----------------------------------------------------------------
 * FORCE

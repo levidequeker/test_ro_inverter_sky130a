@@ -67,7 +67,7 @@ SIM_COMMAND =["make", "typical"]
 
 os.makedirs("output_ac", exist_ok=True)
 
-vdd_array = np.arange(100, 210, 5)/1000
+vdd_array = np.arange(50, 205, 5)/1000
 Cout_list = []
 Rout_list = []
 
@@ -76,7 +76,7 @@ OP_array = df_OP["Vin"]
 
 
 for vdd in vdd_array:
-    OP_ctr = int((vdd*1000-100)/5)
+    OP_ctr = int((vdd*1000-50)/10)
     OP = OP_array[OP_ctr]
     with open("output_ac/current_vdd.spi", "w") as f:
         f.write(f".param AVDD = {vdd}\n")

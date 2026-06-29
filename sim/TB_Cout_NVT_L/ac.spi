@@ -18,16 +18,23 @@
 *-----------------------------------------------------------------
 .param TRF = 10p
 
-.param m_alpha = 22
-.param m_I0 = 13
-.param m_beta = 9
-.param m_gamma = 25
+*Scaled design
+*.param m_alpha = 22
+*.param m_I0 = 13
+*.param m_beta = 9
+*.param m_gamma = 25
+
+*Benchmarked design
+.param m_alpha = 17
+.param m_I0 = 10
+.param m_beta = 7
+.param m_gamma = 20
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
 VDD  VDD  VSS   dc {AVDD}
-VIN  VIN  VSS   dc {OP}
+VIN  VIN  VSS   dc {AVDD/2}
 VOUT VOUT VSS   dc {AVDD/2} ac 1
 
 *-----------------------------------------------------------------

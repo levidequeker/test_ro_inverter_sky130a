@@ -14,7 +14,7 @@ C {devices/ipin.sym} 0 70 0 0 {name=p3 lab=VS}
 C {devices/vsource.sym} 0 -60 0 0 {name=V1 value=0 savecurrent=true}
 C {devices/ipin.sym} 60 0 2 0 {name=p4 lab=VB}
 C {sky130_fd_pr/pfet_01v8_lvt.sym} -20 0 0 0 {name=M1
-W=1
+W=7
 L=0.5
 nf=1
 mult=1

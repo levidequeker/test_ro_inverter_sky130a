@@ -14,10 +14,18 @@
 * OPTIONS
 *-----------------------------------------------------------------
 .option TNOM=27 GMIN=1e-15 reltol=1e-3 rshunt=1e12
-.param m_alpha = 20
-.param m_I0 = 3
-.param m_beta = 2
-.param m_gamma = 8
+
+*Scaled design
+*.param m_alpha = 20
+*.param m_I0 = 3
+*.param m_beta = 2
+*.param m_gamma = 8
+
+*Benchmarked design
+.param m_alpha = 62
+.param m_I0 = 10
+.param m_beta = 5
+.param m_gamma = 24
 *-----------------------------------------------------------------
 * PARAMETERS
 *-----------------------------------------------------------------

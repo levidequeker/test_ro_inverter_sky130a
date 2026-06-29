@@ -19,12 +19,17 @@
 .param TRF = 10p
 
 .param AVDD = {vdda}
-
+*Benchmarked design
+.param m_alpha = 17
+.param m_I0 = 10
+.param m_beta = 7
+.param m_gamma = 20
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VDD  VDD  VSS  pwl 0 0 10n {AVDD}
+VIN VIN VSS sin({AVDD/2} {AVDD/2} 32768)
 
 *-----------------------------------------------------------------
 * DUT
@@ -49,7 +54,7 @@ unset askquit
 optran 0 0 0 1n 1u 0
 
 
-tran 1n 10n 1p
+tran 300n 150u 1p
 write
 quit
 

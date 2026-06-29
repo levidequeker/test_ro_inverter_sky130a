@@ -4,7 +4,7 @@ all: typical etc mc summary
 
 
 
-TB=ac
+TB=tran
 VIEW=Sch
 #VIEW=Lay
 CELL=TB_gm_AC_NVT_L
@@ -17,7 +17,7 @@ test:
 	${MAKE} typical OPT="Debug"
 
 typical: netlist
-	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt Vt
+	cicsim run --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt "V50,V60,V70,V80,V90,V100,V110,V120,V130,V140,V150,V160,V170,V180,V190,V200"
 
 slow: netlist
 	cicsim run --name ${VIEW}_slow ${TB} ${OPT} ${VIEW} Gt Kss "Th,Tl" Vl

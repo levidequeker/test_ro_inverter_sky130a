@@ -99,9 +99,9 @@ df = toDataFrames(ngRawRead(filename))[0]
 
 vds = 0.1
 vs = 0.1
-vgs = -df["v(vg)"].values[1:20006] + vs
+vgs = -df["v(vg)"].values[1:40006] + vs
 vgs_long = -df["v(vg)"].values[1:] + vs
-id = df["i(v.xdut.v1)"].values[1:20006]
+id = df["i(v.xdut.v1)"].values[1:40006]
 id_long = df["i(v.xdut.v1)"].values[1:]
 log_id = np.log(id)
 

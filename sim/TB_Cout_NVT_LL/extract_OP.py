@@ -67,7 +67,7 @@ SIM_COMMAND =["make", "typical"]
 
 os.makedirs("output_tran", exist_ok=True)
 
-vdd_array = np.arange(100, 210, 5)/1000
+vdd_array = np.arange(50, 100, 10)/1000
 vin_list = []
 
 for vdd in vdd_array:
